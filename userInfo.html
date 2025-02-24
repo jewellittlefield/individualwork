@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Information Form</title>
+</head>
+<body>
+    <h2>User Information Form</h2>
+    <form action="updateInfo.php" method="post">
+        <table border="1">
+            <tr>
+                <td>First Name:</td>
+                <td><input type="text" name="firstName" maxlength="20" required pattern="[A-Za-z]+" title="Alphabetical characters only"></td>
+            </tr>
+            <tr>
+                <td>Last Name:</td>
+                <td><input type="text" name="lastName" maxlength="20" required pattern="[A-Za-z]+" title="Alphabetical characters only"></td>
+            </tr>
+            <tr>
+                <td>Phone Number:</td>
+                <td><input type="text" name="phone" placeholder="xxx-xxx-xxxx" maxlength="12" required pattern="\d{3}-\d{3}-\d{4}" title="Format: xxx-xxx-xxxx"></td>
+            </tr>
+            <tr>
+                <td>Email Address:</td>
+                <td><input type="text" name="email" maxlength="30" required pattern="[A-Za-z0-9]+@[A-Za-z]+\.(com|edu)" title="Valid email format (e.g., user@domain.com)"></td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+    </form>
+</body>
+</html>
