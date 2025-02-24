@@ -29,5 +29,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "</ul><a href='userInfo.html'>Go back to the form</a>";
         exit;
     }
+
+    // Read existing data
+    $data = [];
+    $filename = 'userInfo.txt';
+    if (file_exists($filename)) {
+        $lines = file($filename, FILE_IGNORE_NEW_LINES);
+        foreach ($lines as $line) {
+            list($lName, $fName, $ph, $em) = explode(':', $line);
+            $data[$lName] = "$fName:$ph:$em";
+        }
+    }
+
+    // Add new entry
+    $data[$lastName] = "$firstName:$phone:$email";
+
+    // Sort by last name
+    ksort($data);
+
+    // Write back to the file
+    $file = fopen($filename, 'w');
+    foreach ($data as $lName => $info) {
+        fwrite($file, "$lName:$info\n");
+    }
+    fclose($file);
+
+    // Display all data in an HTML table
+    echo "<h2>Data Successfully Saved</h2>";
+    echo "<table border='1'><tr><th>Last Name</th><th>First Name</th><th>Phone</th><th>Email</th></tr>";
+    foreach ($data as $lName => $info) {
+        list($fName, $ph, $em) = explode(':', $info);
+        echo "<tr><td>$lName</td><td>$fName</td><td>$ph</td><td>$em</td></tr>";
+    }
+    echo "</table>";
+    echo "<br><a href='userInfo.html'>Go back to the form</a>";
 }
 ?>
