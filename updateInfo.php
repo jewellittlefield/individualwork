@@ -29,3 +29,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "</ul><a href='userInfo.html'>Go back to the form</a>";
         exit;
     }
+}
