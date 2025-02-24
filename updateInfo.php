@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "</ul><a href='userInfo.html'>Go back to the form</a>";
         exit;
     }
-}
+
     // Read existing data
     $data = [];
     $filename = 'userInfo.txt';
@@ -63,5 +63,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     echo "</table>";
     echo "<br><a href='userInfo.html'>Go back to the form</a>";
-
+}
 ?>
