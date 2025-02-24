@@ -1,5 +1,3 @@
-
-    // Read existing data
     $data = [];
     $filename = 'userInfo.txt';
     if (file_exists($filename)) {
@@ -10,20 +8,16 @@
         }
     }
 
-    // Add new entry
     $data[$lastName] = "$firstName:$phone:$email";
 
-    // Sort by last name
     ksort($data);
 
-    // Write back to the file
     $file = fopen($filename, 'w');
     foreach ($data as $lName => $info) {
         fwrite($file, "$lName:$info\n");
     }
     fclose($file);
 
-    // Display all data in an HTML table
     echo "<h2>Data Successfully Saved</h2>";
     echo "<table border='1'><tr><th>Last Name</th><th>First Name</th><th>Phone</th><th>Email</th></tr>";
     foreach ($data as $lName => $info) {
