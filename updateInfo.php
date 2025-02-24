@@ -1,12 +1,10 @@
 <?php
-// updateInfo.php - Server-side validation and data processing
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $firstName = trim($_POST['firstName']);
     $lastName = trim($_POST['lastName']);
     $phone = trim($_POST['phone']);
     $email = trim($_POST['email']);
 
-    // Validate input
     $errors = [];
     if (empty($firstName) || !preg_match("/^[A-Za-z]+$/", $firstName)) {
         $errors[] = "Invalid or empty first name.";
@@ -30,7 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Read existing data
     $data = [];
     $filename = 'userInfo.txt';
     if (file_exists($filename)) {
@@ -41,20 +38,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Add new entry
     $data[$lastName] = "$firstName:$phone:$email";
 
-    // Sort by last name
     ksort($data);
 
-    // Write back to the file
     $file = fopen($filename, 'w');
     foreach ($data as $lName => $info) {
         fwrite($file, "$lName:$info\n");
     }
     fclose($file);
 
-    // Display all data in an HTML table
     echo "<h2>Data Successfully Saved</h2>";
     echo "<table border='1'><tr><th>Last Name</th><th>First Name</th><th>Phone</th><th>Email</th></tr>";
     foreach ($data as $lName => $info) {
