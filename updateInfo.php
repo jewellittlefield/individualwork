@@ -30,11 +30,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $data = [];
     $filename = 'userInfo.txt';
+
     if (file_exists($filename)) {
         $lines = file($filename, FILE_IGNORE_NEW_LINES);
         foreach ($lines as $line) {
-            list($lName, $fName, $ph, $em) = explode(':', $line);
-            $data[$lName] = "$fName:$ph:$em";
+            $parts = explode(':', $line);
+            if (count($parts) === 4) {
+                list($lName, $fName, $ph, $em) = $parts;
+                $data[$lName] = "$fName:$ph:$em";
+            }
         }
     }
 
@@ -51,8 +55,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "<h2>Data Successfully Saved</h2>";
     echo "<table border='1'><tr><th>Last Name</th><th>First Name</th><th>Phone</th><th>Email</th></tr>";
     foreach ($data as $lName => $info) {
-        list($fName, $ph, $em) = explode(':', $info);
-        echo "<tr><td>$lName</td><td>$fName</td><td>$ph</td><td>$em</td></tr>";
+        $parts = explode(':', $info);
+        if (count($parts) === 3) {
+            list($fName, $ph, $em) = $parts;
+            echo "<tr><td>$lName</td><td>$fName</td><td>$ph</td><td>$em</td></tr>";
+        }
     }
     echo "</table>";
     echo "<br><a href='userInfo.html'>Go back to the form</a>";
