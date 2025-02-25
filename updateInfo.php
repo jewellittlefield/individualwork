@@ -53,12 +53,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     fclose($file);
 
     echo "<h2>Data Successfully Saved</h2>";
-    echo "<table border='1'><tr><th>Last Name</th><th>First Name</th><th>Phone</th><th>Email</th></tr>";
+    echo "<table border='1'>";
+    echo "<tr><th>Last Name</th><th>First Name</th><th>Phone</th><th>Email</th></tr>";
+
     foreach ($data as $lName => $info) {
         $parts = explode(':', $info);
         if (count($parts) === 3) {
             list($fName, $ph, $em) = $parts;
-            echo "<tr><td>$lName</td><td>$fName</td><td>$ph</td><td>$em</td></tr>";
+            echo "<tr><td>" . htmlspecialchars($lName) . "</td><td>" . htmlspecialchars($fName) . "</td><td>" . htmlspecialchars($ph) . "</td><td>" . htmlspecialchars($em) . "</td></tr>";
         }
     }
     echo "</table>";
