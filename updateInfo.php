@@ -60,9 +60,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $parts = explode(':', $info);
         if (count($parts) === 3) {
             list($fName, $ph, $em) = $parts;
-            echo "<tr><td>" . htmlspecialchars($lName) . "</td><td>" . htmlspecialchars($fName) . "</td><td>" . htmlspecialchars($ph) . "</td><td>" . htmlspecialchars($em) . "</td></tr>";
+            echo "<tr>";
+            echo "<td>" . htmlspecialchars($lName) . "</td>";
+            echo "<td>" . htmlspecialchars($fName) . "</td>";
+            echo "<td>" . htmlspecialchars($ph) . "</td>";
+            echo "<td>" . htmlspecialchars($em) . "</td>";
+            echo "</tr>";
         }
     }
+    
     echo "</table>";
     echo "<br><a href='userInfo.html'>Go back to the form</a>";
 }
